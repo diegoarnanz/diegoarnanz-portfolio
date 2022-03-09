@@ -1,0 +1,60 @@
+// /* Aquí definimos las Custom properties */
+:root{
+    --negro         : #101010;
+    --blanco        : #ececec;
+    --fondo         : #214a4d;
+    --gris          : #f0bf92;
+    --medio         : #af8054;
+
+
+    --marcado       : rgb(127, 195, 255);
+
+    /* Tipografía */
+
+    
+    --display     : almarena;
+    --textos      : montreal;
+    --textoslight : montreallight
+}
+
+
+
+
+/* Aquí definimos las Custom properties */
+// :root{
+//     --blanco         : #101010;
+//     --negro        : #ececec;
+//     --gris         : #ffffff;
+//     --fondo          : #000000;
+//     --medio         : #000000;
+
+
+//     --marcado       : rgb(127, 195, 255);
+
+//     /* Tipografía */
+
+    
+//     --display     : 'almarenadisplay_regular';
+//     --textos      : haas;
+//     --textoslight : haaslight
+// }
+
+
+    
+/* Las adaptamos al modo oscuro */
+// @media (prefers-color-scheme: dark) {
+//     :root{
+//         --fondo         : #D9AB81;
+//         --gris          : #162F31;
+//         --negro         : #ececec;
+//         --blanco        : #303030;
+//     }
+// }
+
+
+/* Configuramos si un usuario ha activado el modo alto contraste. (WD) */
+// @media (prefers-contrast: high){
+//     :root{
+//         
+//     }
+// }

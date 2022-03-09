@@ -1,0 +1,50 @@
+@mixin tfix(){
+	transform: perspective(1px);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+@mixin flex( $a, $b, $c, $d ){
+	display : flex;
+	flex-flow : $a $b;
+	justify-content	: $c;
+	@if $b == 'nowrap' {
+		align-items		: $d;	
+	}@else{
+		align-content	: $d;
+	}	
+}
+
+
+
+// responsive
+
+@mixin smallmobile{
+	@media screen and (max-width: 320px){
+		@content;
+	}
+}
+@mixin mobile{
+	@media screen and (max-width: 480px){
+		@content;
+	}
+}
+@mixin smalltablet{
+	@media screen and (max-width: 768px){
+		@content;
+	}
+}
+@mixin tablet{
+	@media screen and (max-width: 920px){
+		@content;
+	}
+}
+@mixin smalllaptop{
+	@media screen and (max-width: 1024px){
+		@content;
+	}
+}
+@mixin laptop{
+	@media screen and (max-width: 1440px){
+		@content;
+	}
+}

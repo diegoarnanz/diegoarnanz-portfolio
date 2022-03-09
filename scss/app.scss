@@ -1,0 +1,1134 @@
+@import '_variables' , '_reset' , '_mixins' , '_keyframes';
+
+
+::-webkit-scrollbar{
+    display: none;
+}
+body{
+    position: relative;
+    overflow-x: hidden;
+    transition: .4s ease;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+
+// .cursor{
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 4em;
+//     height: 4em;
+//     border-radius: 2em;
+//     opacity: .5;
+//     background-color: var(--gris);
+//     z-index: 99;
+//     pointer-events: none;
+//     transition: all .12s ease;
+
+//     @include tablet{
+//         display: none;
+//     }
+
+//     &.in{
+//         opacity: 1;
+//         width: 1em;
+//         height: 1em;
+//         background-color: var(--fondo);
+
+//         @include tablet{
+//             display: none;
+//         }
+    
+//     }
+// }
+.ruido{
+    border: 1px solid aquamarine;
+    position: fixed;
+    opacity: .12;
+    animation: grain .7s steps(1) infinite;
+    height: 200vh;
+    width: 200vw;
+    left: -50%;
+    top: -50%;
+    z-index: 50;
+    background-image: url("/assets/images/MAIN/ruidofondo.png");
+    pointer-events: none;
+
+
+}
+.circulos{
+    width: 44em;
+    height: 44em;
+    position: fixed;
+    top: calc(50% - 22em);
+    left: calc(50% - 22em);
+    z-index: -1;
+
+    @include tablet{
+        width: 34em;
+        height: 34em;
+        top: calc(50% - 17em);
+        left: calc(50% - 17em);
+    }
+    @include mobile{
+        width: 24em;
+        height: 24em;
+        top: calc(50% - 12em);
+        left: calc(50% - 12em);
+    }
+    &__externo{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #42615d;
+        border-radius: 50%;
+        filter: blur(30px);
+        transition: all .5s ease;
+        animation: aparecer .8s ease 1 .5s both, circuloexterno 6s linear 1s infinite;
+    }
+    &__interno{
+        width: 24em;
+        height: 24em;
+        background-color: #694243;
+        border-radius: 50%;
+        filter: blur(30px);
+        position: absolute;
+        top: calc(50% - 12em);
+        left: calc(50% - 12em);
+        transition: all .5s ease;
+        animation: aparecer .8s ease 1 .8s both, circulointerno 6s linear 1s infinite;
+
+        @include tablet{
+            width: 18em;
+            height: 18em;
+            top: calc(50% - 9em);
+            left: calc(50% - 9em);
+        }
+        @include mobile{
+            width: 14em;
+            height: 14em;
+            top: calc(50% - 7em);
+            left: calc(50% - 7em);
+        }
+    }
+}
+.logo{
+    width: 3em;
+    height: 3em;
+    background-color: var(--gris);
+    position: fixed;
+    left: 4em;
+    top: 2em;
+    animation: aparecerImg .8s ease 1 .5s both;
+    @include flex( row, nowrap, center, center);
+
+    &__svg{
+        width: 60%;
+        fill: var(--fondo);
+    }
+    &.clear{
+        background-color: var(--fondo);
+
+        .logo__svg{
+            fill: var(--gris);
+        }
+    }
+
+    @include mobile{
+        left: 2em;
+    }
+}
+
+.portfolio{
+    width: 10em;
+    text-align: center;
+    position: fixed;
+    left: calc(50% - 5em);
+    top: 3em;
+    font-family: var(--textos);
+    text-transform: uppercase;
+    animation: aparecerImg .8s ease 1 .5s both;
+
+    @include mobile{
+        font-size: .5em;
+        top: 6em;
+    }
+}
+.nav{
+    position: fixed;
+    right: 4em;
+    top: 3em;
+    z-index: 1;
+    animation: aparecerImg .8s ease 1 .5s both;
+    @include flex (row, nowrap, center, center);
+
+    @include mobile{
+        right: 2em;
+    }
+
+    &__ul{
+        width: 100%;
+        @include flex (row, nowrap, center, center);
+    }
+    &__li{
+        text-transform: uppercase; 
+        
+        &::after{
+            content: '';
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: var(--gris);
+            transition: transform .5s ease;
+        }
+        &::after{
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+        &:hover::after{
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        &.back{
+            padding: .8em 1.5em;
+            border-radius: .5em;
+
+            &::after{
+                display: none;
+            }
+        }
+        &.color{
+            background-color: var(--fondo);
+            transition: all .5s ease;
+        }
+        a.color{
+            color: var(--gris);
+        }
+    
+    }
+}
+.span{
+    color: var(--gris);
+    border: 1px solid var(--gris);
+    border-radius: .5em;
+    position: fixed;
+    left: 4em;
+    bottom: 4em;
+    padding: .8em 1.5em;
+    text-transform: uppercase;
+    z-index: 2;
+    transition: all .4s ease;
+    animation: aparecerImg .8s ease 1 .5s both;
+
+    @include mobile{
+        left: 2em;
+    }
+    &:hover{
+        color: var(--fondo);
+        background-color: var(--gris);
+    }
+}
+.slide{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: all .8s cubic-bezier(.57,.04,.45,.96);
+    z-index: 10;
+
+    &.uno{
+        background-color: var(--gris);
+        &.color{
+            background-color: var(--gris);
+        }
+    }
+    &.dos{
+        background-color: var(--medio);
+        transition-delay: .1s;
+        &.color{
+            background-color: var(--medio);
+        }
+    }
+    &.tres{
+        background-color: var(--fondo);
+        transition-delay: .2s;
+        &.color{
+            background-color: var(--gris);
+        }
+    }
+
+    &.activo{
+        transform: scaleX(1);
+    }
+    &.reverse{
+        transform-origin: left;
+    }
+}
+.footer{
+    font-size: 1.1em;
+    width: 100%;
+    background-color: var(--gris);
+    color: var(--fondo);
+
+    padding: 3em;
+    @include flex(row, nowrap, space-between, flex-start);
+
+    @include mobile{
+        font-size: .8em;
+    }
+    &.color{
+        background-color: var(--fondo);
+        color: var(--gris);
+        p{
+            color: var(--gris);
+        }
+    
+    }
+    &__col{
+        padding: 1em 0;
+    }
+    &__block{
+        width: 45%;
+        @include flex(row, nowrap, space-between, flex-start);
+
+        @include tablet{
+            @include flex(column, nowrap, space-between, flex-start);
+
+        }
+    }
+    &__a{
+        cursor: pointer;
+    }
+        &.title{
+            font-family: var(--textos);
+            margin-bottom: 1em;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main{
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    position: relative;
+    @include flex( row, nowrap, center, center);
+
+    &__box{
+        @include flex( column, nowrap, space-between, flex-end);
+    }
+    &__h1{
+        font-family: var(--display);
+        font-size: 11em;
+        line-height: 1.1em;
+        transition: all .5s ease;
+        overflow: hidden;
+
+        @include laptop{
+            font-size: 9em;
+        }
+        @include tablet{
+            font-size: 8em;
+        }
+        @include mobile{
+            font-size: 4em;
+        }
+        &--intro{
+            animation: aparecer .8s ease 1 1.3s both;
+        }
+    }
+    &__h2{
+        font-family: var(--textos);
+        text-transform: uppercase;
+        font-size: 2em;
+        line-height: 1em;
+        transition: all .5s ease;
+        overflow: hidden;
+
+        @include tablet{
+            font-size: 1.5em;
+        }
+        @include mobile{
+            font-size: 1em;
+        }
+
+        &--intro{
+            animation: aparecer 1s ease 1 1.5s both;
+        }
+    }
+    &__h2:nth-of-type(3){
+        .main__h2--intro{
+            animation: aparecer 1s ease 1 1.7s both;
+        }
+    }
+}
+.scroll{
+    width: 9em;
+    height: 9em;
+    position: absolute;
+    left: calc(50% - 4.5em);
+    bottom: 10%;
+    animation: aparecerImg .8s ease 1 .5s both;
+    @include flex(row, nowrap, center, center);
+
+
+    @include tablet{
+        width: 7em;
+        height: 7em;
+
+        left: calc(50% - 3.5em)
+    }
+    @include mobile{
+        bottom: 10em
+    }
+
+
+    &__circle{
+    fill: var(--gris);
+    animation: scroll 10s linear infinite .3s;
+    }
+
+    &__arrow{
+        fill: var(--gris);
+        width: 25%;
+        position: absolute;
+    }
+
+}
+
+.work{
+    position: relative;
+    height: 100vh;
+
+    @include flex(column, nowrap, center, center);
+
+    &__box{
+        position: relative;
+        @include flex( row, nowrap, center, center);
+
+        &.set{
+            pointer-events: none;
+        }
+
+        &::before{
+            content: 'selected projects';
+            font-size: 1.5em;
+            font-family: var(--textoslight);
+            position: absolute;
+            left: 0;
+            top: -5em;
+        }
+    
+    }
+    &__li{
+        position: relative;
+        transform: translateY(5em);
+        transition: all .5s ease;
+        opacity: 0;
+
+        &.activo{
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    &__em{
+        font-family: var(--textoslight);
+        position: absolute;
+        left: -5em;
+        top: calc(50% - .5em);
+        transition: all .5s ease;
+
+        @include tablet{
+            font-size: 1em;
+        }
+        @include mobile{
+            display: none;
+        }
+    }
+    &__a{
+        font-family: var(--display);
+        line-height: 1em;
+        font-size: 8em;
+        position: relative;
+        transition: all .5s ease;
+        -webkit-text-stroke-color: transparent;
+        -webkit-text-stroke-width: .8px;
+
+        @include tablet{
+            font-size: 6em;
+        }
+        @include mobile{
+            text-align: center;
+            font-size: 4em;
+            padding: .2em 0;
+        }
+
+        &.activo{
+            color: transparent;
+            -webkit-text-stroke-color: var(--gris);
+        }
+    }
+    &__span{
+        width: 15em;
+        position: absolute;
+        left: -15em;
+        font-size: 1.3em;
+        font-family: var(--textoslight);
+        opacity: 0;
+        transform: translateY(-2em);
+        transition: all .5s ease;
+
+        &.activo{
+            opacity: 1;
+            transform: translateY(0);
+
+        }
+        
+        @include laptop{
+            font-size: 1em;
+        }
+    }
+}
+.images{
+    position: absolute;
+    width: 35em;
+    height: 45em;
+    right: 15em;
+    bottom: calc(50% - 22.5em);
+    z-index: -1;
+    transform: translateX(15em);
+    opacity: 0;
+    transition: all .5s ease;
+
+    @include laptop{
+        width: 28em;
+        height: 35em;
+        right: 10em;
+        bottom: calc(50% - 17.5em);
+    }
+    @include tablet{
+        display: none;
+    }
+
+    &.activo{
+        opacity: 1;
+        transform: translateX(0);
+
+    }
+
+    &__img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: all .8s ease;
+        position: absolute;
+
+        &.activo{
+            opacity: 1;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ABOUT PAGE
+.about{
+    overflow-x: hidden;
+}
+.mainAbout{
+    max-width: 1228px;
+    margin: auto;
+    transition: all .5s ease;
+
+    @include laptop{
+        width: 1020px;
+    }
+    @include smalllaptop{
+        width: 768px;
+    }
+    @include tablet{
+        width: 580px;
+    }
+    @include smalltablet{
+        width: 450px;
+    }
+    @include mobile{
+        width: 340px;
+    }
+}
+.header{
+    width: 100%;
+    height: 100vh;
+
+    @include tablet{
+        height: 80vh;
+    }
+    @include mobile{
+        height: 80vh;
+    }
+
+    &__h1{
+        position: relative;
+        padding-top: .5em;
+        font-family: var(--display);
+        font-size: 12em;
+        line-height: 1em;
+
+        .right{
+            text-align: right;
+        }
+
+        @include laptop{
+            font-size: 11em;
+        }
+        @include smalllaptop{
+            font-size: 9em;
+        }
+        @include tablet{
+            padding-top: 1em;
+            font-size: 7em;
+        }
+        @include mobile{
+            padding-top: 1.5em;
+            font-size: 4em;
+        }
+    
+    }
+    &__image{
+        width: 2.5em;
+        position: absolute;
+        bottom: -130%;
+        left: calc(50% - 1.25em);
+        overflow: hidden;
+        z-index: -1;
+
+        @include tablet{
+            width: 3.5em;
+            left: calc(50% - 1.75em);
+            bottom: -150%;
+        }
+        @include mobile{
+            width: 4em;
+            left: calc(50% - 2em);
+
+            bottom: -150%;
+        }
+
+    }
+
+}
+.textos{
+    width: 100%;
+    margin-bottom: 9em;
+
+    &__parrafo{
+        margin-left: 35%;
+
+        @include tablet{
+            margin: 0;
+        }
+    }
+    &__p{
+        font-family: var(--textoslight);
+        font-size: 1.8em;
+        line-height: 1.3em;
+        margin-bottom: 1em;
+
+        @include tablet{
+            font-size: 1.5em;
+        }
+        @include mobile{
+            font-size: 1.2em;
+        }
+
+    }
+    &__span{
+        margin: 1em 0 1em 35%;
+        font-size: 4.5em;
+        line-height: 1.2em;
+        text-transform: uppercase;
+        font-family: var(--textoslight);
+
+        @include tablet{
+            font-size: 3em;
+            margin: 2em 0;
+        }
+        @include mobile{
+            font-size: 2em;
+            margin: 1em 0 2em 0;
+        }
+    }
+}
+.skills{
+    width: 100%;
+    margin: 8em 0;
+
+    &__span{
+        font-size: 3em;
+
+        &.right{
+            text-align: right
+        }
+
+        @include mobile{
+            font-size: 2em
+        }
+    }
+    &__ul{
+        @include flex(row, wrap, space-between, center);
+    }
+    &__li{
+        position: relative;
+        width: 32%;
+        font-size: 1.5em;
+        font-family: var(--textoslight);
+        padding: 1.2em 0 .4em 0;
+
+        &::after{
+            content: '';
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: var(--gris);
+            transition: transform .5s ease;
+            transform-origin: left;
+
+        }
+        &:hover::after{
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+
+        @include tablet{
+            font-size: 1.2em;
+        }
+        @include mobile{
+            width: 48%;
+        }
+
+
+
+    }
+}
+.contact{
+    max-width: 1228px;
+    margin: auto;
+    padding: 5em 0 10em 0;
+    transition: all .5s ease;
+
+    @include laptop{
+        width: 1020px;
+    }
+    @include smalllaptop{
+        width: 768px;
+    }
+    @include tablet{
+        width: 580px;
+    }
+    @include smalltablet{
+        width: 450px;
+    }
+    @include mobile{
+        width: 340px;
+    }
+
+
+    &__box{
+        width: 100%;
+        margin-bottom: 6em;
+
+        &--redes{
+            @include flex(row, nowrap, flex-start, flex-start);
+        }
+    }
+    &__h1{
+        font-family: var(--display);
+        font-size: 7em;
+        line-height: 1.1em;
+        transition: all .5s ease;
+        overflow: hidden;
+
+        @include laptop{
+            font-size: 6em;
+        }
+        @include tablet{
+            font-size: 5em;
+        }
+        @include smalltablet{
+            font-size: 4em;
+        }
+    }
+    &__h1:nth-of-type(2){
+        margin-bottom: .2em;
+    }
+    &__texto{
+        font-family: var(--textoslight);
+        font-size: 1.5em;
+        line-height: 1em;
+        transition: all .5s ease;
+        overflow: hidden;
+
+        @include tablet{
+            font-size: 1em;
+            line-height: 1em;
+        }
+    }
+    
+    &__h2{
+        line-height: 1em;
+        font-family: var(--display);
+        font-size: 3em;
+        line-height: 1.4em;
+        display: inline-block;
+        margin: 0 0 1em;
+        position: relative;
+        overflow: hidden;
+        transition: all .5s ease;
+
+        @include tablet{
+            font-size: 2.5em;
+        }
+        @include smalltablet{
+            font-size: 2em;
+        }
+
+        &--intro{
+            position: relative;
+            animation: aparecer .8s ease 1 .8s both;
+
+            &::after{
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 1px;
+                width: 100%;
+                background-color: var(--gris);
+                transition: transform .5s ease;
+                transform-origin: left;
+            }
+            &:hover::after{
+                transform: scaleX(0);
+                transform-origin: right;
+            }
+        }
+    }
+    &__ul{
+        @include flex(row, nowrap, flex-start, center);
+    }
+    &__li{
+        @include flex(row, nowrap, space-between, flex-end);
+    }
+    &__svg{
+        width: 1.6em;
+        height: 1.6em;
+        margin-right: 1em;
+        svg{
+            width: 100%;
+        }
+
+        @include mobile{
+            margin-right: 2.5em;
+        }
+    }
+    &__a{
+        display: inline-block;
+        position: relative;
+        font-size: 1.2em;
+        line-height: 1em;
+        margin-right: 3em;
+        font-family: var(--textoslight);
+
+        @include mobile{
+            display: none;
+        }
+
+        &::after{
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 1px;
+            width: 100%;
+            background-color: var(--gris);
+            transition: transform .5s ease;
+            transform-origin: right;
+            transform: scaleX(0);
+        }
+        &:hover::after{
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// PROJECT
+.projectpage{
+    background-color: var(--gris);
+    .cursor{
+        background-color: var(--fondo);
+    }
+    color: var(--fondo);
+}
+.box{
+    padding: 10em 0;
+    max-width: 1328px;
+    margin: auto;
+    @include flex(row, nowrap, center, flex-start);
+
+    @include laptop{
+        width: 1000px;
+    }
+    @include smalllaptop{
+        width: 850px;
+    }
+    @include tablet{
+        width: 600px;
+    }
+    @include smalltablet{
+        width: 450px;
+    }
+    @include mobile{
+        padding: 7em 0;
+        width: 350px;
+        @include flex(column, nowrap, center, flex-start);
+
+    }
+
+    &__col{
+        @include flex(column, nowrap, center, flex-start);
+    }
+    &__col:nth-child(1){
+        width: 40%;
+        @include flex(column, nowrap, flex-start, flex-start);
+
+        @include mobile{
+            width: 100%;
+            margin: 2em 0;
+            @include flex(row, nowrap, space-around, center);
+        }
+
+    }
+    &__col:nth-child(2){
+        width: 60%;
+        @include flex(column, nowrap, flex-start, flex-start);
+
+        @include mobile{
+            width: 100%;
+        }
+    }
+    &__cat{
+        width: 100%;
+        padding: 1.5em 0;
+    }
+    &__a{
+        padding: .5em;
+        font-family: var(--display);
+        font-size: 1.5em;
+        border: 1px solid var(--fondo);
+        border-radius: .5em;
+        margin-top: 1em;
+        transition: all .4s ease;
+
+        &:hover{
+            color: var(--gris);
+            background-color: var(--fondo);
+        }
+    }
+    &__h1{
+        font-family: var(--display);
+        font-size: 5em;
+        line-height: 1em;
+        margin-bottom: .5em;
+
+        @include tablet{
+            font-size: 4em;
+        }
+        @include mobile{
+            font-size: 4em;
+        }
+    }
+    &__span{
+        font-family: var(--display);
+        text-transform: uppercase;
+        font-size: 1.5em;
+    }
+    &__p{
+        font-size: 1.2em;
+        line-height: 1.4em;
+        font-family: var(--textoslight);
+
+        @include tablet{
+            line-height: 1.4em;
+
+        }
+        @include mobile{
+            font-size: 1.2em;
+            line-height: 1.4em;
+        }
+
+        &.p{
+            margin-bottom: 1em;
+        }
+    }
+}
+.portada{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 70vw;
+    margin: auto;
+    overflow: hidden;
+
+    &.beatriz{
+        background-image: url("/assets/images/BP_project/3.jpg");
+    }
+    &.fiera{
+        background-image: url("/assets/images/FIERA/PORTADA.jpg");
+    }
+}
+.mainProject{
+    max-width: 1328px;
+    margin: auto;
+    margin-bottom: 10em;
+
+    @include laptop{
+        width: 900px;
+    }
+    @include smalllaptop{
+        width: 750px;
+    }
+    @include tablet{
+        width: 100vw;
+    }
+
+    &__video{
+        width: 100vw;
+    }
+    &__span{
+        display: inline-block;
+        margin: 4em 0 2em 0;
+        font-size: 2em;
+        text-transform: uppercase;
+
+        @include mobile{
+            font-size: 1.5em;
+            margin: 4em 0 1em 1em;
+        }
+    }
+    &__p{
+        display: inline-block;
+        margin-bottom: 2em;
+        font-family: var(--textoslight);
+    }
+    &__p:nth-of-type(2){
+        margin-bottom: 10em;
+    }
+    &__image{
+        margin: 0 0 4em 0;
+    }
+    &__image.poster{
+        width: 50%;
+        margin: 0;
+        padding: 0;
+
+        @include mobile{
+            width: 100%
+        }
+    }
+    &__mobile{
+        @include flex(row, nowrap, space-between, center);
+    }
+    &__mob{
+        width: 28%;
+    }
+}
+.logos{
+    @include flex(row, wrap, center, center);
+
+    &__image{
+        width: 50%;
+        
+        @include mobile{
+            width: 100%;
+        }
+    }
+}
+.posters{
+    @include flex(row, wrap, center, center);
+}
+.navegador{
+    width: 100%;
+    margin: 10em 0;
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 2em;
+    @include flex(row, nowrap, center, center);
+
+    &__a{
+        color: var(--gris);
+        margin: 0 3em;
+    }
+}
+
+
+
+// END OF FIERA CERAMICS PAGE
+
+
+
+
+
+
+
+
+
+
+
+
+
